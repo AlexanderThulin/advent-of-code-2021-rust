@@ -1,1 +1,1 @@
-# advent-of-code-2021-rust
+#Advent of code 2021 in Rust
