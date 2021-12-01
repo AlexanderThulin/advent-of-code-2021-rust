@@ -5,10 +5,12 @@ pub fn remove_whitespace(s: &mut String) {
 }
 
 pub fn parse_file_to_string(filename: &str) -> String {
-	println!("Trying to read file: '{}'", filename);
-	fs::read_to_string(filename).expect("Something went wrong when reading the file.")
+	fs::read_to_string(filename).expect(&format!("Something went wrong when reading the file {}.", filename)[..])
 }
 
-pub fn parse_str_to_u32(text: &str) -> u32 {
-	text.parse::<u32>().unwrap()
+pub fn read_file_to_lines(filename: &str) -> Vec<String> {
+	let file_str = parse_file_to_string(filename);
+	let lines: Vec<&str> = file_str.lines().collect();
+	let lines = lines.iter().map(|s| s.to_string()).collect();
+	lines
 }
