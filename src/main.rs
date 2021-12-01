@@ -1,14 +1,14 @@
+#![feature(array_windows)]
+
 mod days;
 mod utils;
 
 fn main() {
 	let day: u32 = get_day_selection();
 	let mut res: (Option<String>, Option<String>) = (None, None);
-	let input: &str = &format!("./input/2021-{}.txt", day)[..];
-	let lines = utils::read_file_to_lines(input);
 
 	match day {
-		1 => { res = days::one::run(lines); }
+		1 => { res = days::one::run(); }
 		2 => { days::two::run(); }
 		20201 => { days::twentytwenty_one::run() }
 		_ => { println!("Day not started."); }
