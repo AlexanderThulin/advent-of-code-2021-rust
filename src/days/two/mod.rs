@@ -8,30 +8,25 @@ pub fn main() {
 		.collect();
 
 	// PART ONE
-	let mut horizontal = 0;
-	let mut depth = 0;
-	for direction in &directions {
-		match direction.0 {
-			"forward" => { horizontal += direction.1; }
-			"down" => { depth += direction.1 }
-			"up" => { depth -= direction.1 }
-			_ => { println!("Direction '{:?}' not understood.", direction) }
+	let (horizontal, depth) = directions.iter().fold((0, 0), |(horizontal, depth), (direction, value)| {
+		match  *direction {
+			"forward" => (horizontal + value, depth),
+			"down" => (horizontal, depth + value),
+			"up" => (horizontal, depth - value),
+			_ => unreachable!(),
 		}
-	}
+	});
 	let res_one = horizontal * depth;
 
 	// PART TWO
-	let mut horizontal = 0;
-	let mut depth = 0;
-	let mut aim = 0;
-	for direction in &directions {
-		match direction.0 {
-			"forward" => { horizontal += direction.1; depth += aim * direction.1 }
-			"down" => { aim += direction.1 }
-			"up" => { aim -= direction.1 }
-			_ => { println!("Direction '{:?}' not understood.", direction) }
+	let (horizontal, depth, _) = directions.iter().fold((0, 0, 0), |(horizontal, depth, aim), (direction, value)| {
+		match  *direction {
+			"forward" => (horizontal + value, depth + aim * value, aim),
+			"down" => (horizontal, depth, aim + value),
+			"up" => (horizontal, depth, aim - value),
+			_ => unreachable!(),
 		}
-	}
+	});
 	let res_two = horizontal * depth;
 
 	println!("Part one: {}", res_one); 
