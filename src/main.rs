@@ -9,6 +9,7 @@ fn main() {
 	match day {
 		1 => { days::one::main(); }
 		2 => { days::two::main(); }
+		3 => { days::three::main(); }
 		20201 => { days::twentytwenty_one::run() }
 		_ => { println!("Day not started."); }
 	}
