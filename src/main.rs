@@ -11,6 +11,7 @@ fn main() {
 		2 => { days::two::main(); }
 		3 => { days::three::main(); }
 		4 => { days::four::main(); }
+		5 => { days::five::main(); }
 		20201 => { days::twentytwenty_one::run() }
 		_ => { println!("Day not started."); }
 	}
