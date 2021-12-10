@@ -31,33 +31,33 @@ fn translate_number(keys: &Vec<&str>, digits: &Vec<&str>) -> u32 {
     for key in keys {
         match key.len() {
             4 => {
-                for character in key.chars() {
-                    four.push(character);
-                }
+                four.extend(key.chars());
             }
             3 => {
-                for character in key.chars() {
-                    seven.push(character);
-                }
+                seven.extend(key.chars());
             }
             _ => {}
         }
     }
 
     for digit in digits {
-        match digit.len() {
-            2 => res.push("1"),
-            4 => res.push("4"),
-            3 => res.push("7"),
-            7 => res.push("8"),
-            5 if digit.chars().filter(|c| seven.contains(c)).count() == 3 => res.push("3"),
-            5 if digit.chars().filter(|c| four.contains(c)).count() == 2 => res.push("2"),
-            5 => res.push("5"),
-            6 if digit.chars().filter(|c| seven.contains(c)).count() == 2 => res.push("6"),
-            6 if digit.chars().filter(|c| four.contains(c)).count() == 4 => res.push("9"),
-            6 => res.push("0"),
+        match (
+            digit.len(),
+            digit.chars().filter(|c| four.contains(c)).count(),
+            digit.chars().filter(|c| seven.contains(c)).count(),
+        ) {
+            (2, _, _) => res.push("1"),
+            (4, _, _) => res.push("4"),
+            (3, _, _) => res.push("7"),
+            (7, _, _) => res.push("8"),
+            (5, _, 3) => res.push("3"),
+            (5, 2, _) => res.push("2"),
+            (5, _, _) => res.push("5"),
+            (6, _, 2) => res.push("6"),
+            (6, 4, _) => res.push("9"),
+            (6, _, _) => res.push("0"),
             _ => {
-                panic!("Unexpected length encountered.")
+                panic!("Can't translate digit.")
             }
         }
     }
