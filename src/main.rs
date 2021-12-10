@@ -1,4 +1,5 @@
 #![feature(array_windows)]
+#![feature(slice_group_by)]
 
 mod days;
 mod utils;
@@ -15,6 +16,7 @@ fn main() {
 		6 => { days::six::main(); }
 		7 => { days::seven::main(); }
 		8 => { days::eight::main(); }
+		9 => { days::nine::main(); }
 		20201 => { days::twentytwenty_one::run() }
 		_ => { println!("Day not started."); }
 	}
