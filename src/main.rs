@@ -35,6 +35,9 @@ fn main() {
         9 => {
             days::nine::main();
         }
+        10 => {
+            days::ten::main();
+        }
         20201 => days::twentytwenty_one::run(),
         _ => {
             println!("Day not started.");
