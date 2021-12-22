@@ -1,10 +1,10 @@
 pub fn main() {
     let mut input = include_str!("input.txt")
-        .split(",")
+        .split(',')
         .map(|n| n.parse::<i32>().unwrap())
         .collect::<Vec<_>>();
 
-    input.sort();
+    input.sort_unstable();
     let med = input[input.len() / 2];
 
     let res_one = input.iter().map(|p| (p - med).abs()).sum::<i32>();

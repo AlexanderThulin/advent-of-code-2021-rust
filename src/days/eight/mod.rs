@@ -23,7 +23,7 @@ pub fn main() {
     println!("Result two: {:?}", res_two);
 }
 
-fn translate_number(keys: &Vec<&str>, digits: &Vec<&str>) -> u32 {
+fn translate_number(keys: &[&str], digits: &[&str]) -> u32 {
     let mut four: Vec<char> = vec![];
     let mut seven: Vec<char> = vec![];
     let mut res: Vec<&str> = vec![];

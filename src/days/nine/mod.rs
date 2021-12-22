@@ -54,7 +54,7 @@ pub fn main() {
 
     let mut basin_n = basins
         .iter()
-        .flat_map(|n| n)
+        .flatten()
         .filter(|n| *n != &u16::MAX)
         .collect::<Vec<_>>();
     basin_n.sort_unstable_by(|a, b| b.cmp(a));

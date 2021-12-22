@@ -41,10 +41,10 @@ pub fn main() {
     // PART TWO
     let width: usize = binary_map[0].len();
     let mut oxy_temp = binary_map.clone();
-    let mut co2_temp = binary_map.clone();
+    let mut co2_temp = binary_map;
 
     for i in 0..width {
-        let col_sum: u32 = oxy_temp.iter().map(|arr| arr.iter().nth(i).unwrap()).sum();
+        let col_sum: u32 = oxy_temp.iter().map(|arr| arr.get(i).unwrap()).sum();
         let wanted = if (col_sum as f32) >= ((oxy_temp.len() as f32) / 2.0) {
             1
         } else {
@@ -58,7 +58,7 @@ pub fn main() {
     }
 
     for i in 0..width {
-        let col_sum: u32 = co2_temp.iter().map(|arr| arr.iter().nth(i).unwrap()).sum();
+        let col_sum: u32 = co2_temp.iter().map(|arr| arr.get(i).unwrap()).sum();
         let wanted = if (col_sum as f32) >= ((co2_temp.len() as f32) / 2.0) {
             0
         } else {

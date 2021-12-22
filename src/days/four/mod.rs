@@ -2,14 +2,14 @@ pub fn main() {
     let input = include_str!("input.txt")
         .split("\r\n\r\n")
         .collect::<Vec<&str>>();
-    let draw = &input[0].split(",").collect::<Vec<_>>();
+    let draw = &input[0].split(',').collect::<Vec<_>>();
     let tickets = &input[1..]
         .iter()
         .map(|ticket| {
             ticket
                 .lines()
                 .map(|line| {
-                    line.split(" ")
+                    line.split(' ')
                         .filter(|number| number != &"")
                         .collect::<Vec<_>>()
                 })
@@ -48,7 +48,7 @@ pub fn main() {
                             }
                         }
                     }
-                    if first_not_drawn.len() == 0 {
+                    if first_not_drawn.is_empty() {
                         first_not_drawn = temp;
                         first_last_drawn = draw[i].parse::<u32>().expect("Could not parse number.");
                     } else {
@@ -63,8 +63,8 @@ pub fn main() {
                 }
             }
             for col_n in 0..5 {
-                'col_check: for n in 0..5 {
-                    if draw[0..i + 1].iter().any(|num| *num == ticket[n][col_n]) {
+                'col_check: for row in ticket.iter().take(5) {
+                    if draw[0..i + 1].iter().any(|num| *num == row[col_n]) {
                         found += 1;
                     } else {
                         break 'col_check;
@@ -81,7 +81,7 @@ pub fn main() {
                             }
                         }
                     }
-                    if first_not_drawn.len() == 0 {
+                    if first_not_drawn.is_empty() {
                         first_not_drawn = temp;
                         first_last_drawn = draw[i].parse::<u32>().expect("Could not parse number.");
                     } else {
@@ -99,11 +99,13 @@ pub fn main() {
     }
 
     println!(
-        "Part one: {}",
-        first_not_drawn.iter().sum::<u32>() * first_last_drawn
+        "Part one: {} {}",
+        first_not_drawn.iter().sum::<u32>() * first_last_drawn,
+        first_last_drawn
     );
     println!(
-        "Part two: {}",
-        last_not_drawn.iter().sum::<u32>() * last_last_drawn
+        "Part two: {} {}",
+        last_not_drawn.iter().sum::<u32>() * last_last_drawn,
+        last_last_drawn
     );
 }

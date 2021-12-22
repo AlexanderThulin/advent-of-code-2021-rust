@@ -5,7 +5,7 @@ pub fn main() {
             line.split(" -> ")
                 .map(|point| {
                     point
-                        .split(",")
+                        .split(',')
                         .map(|value| value.parse::<usize>().expect("Could not parse value."))
                         .collect::<Vec<_>>()
                 })
@@ -32,15 +32,15 @@ pub fn main() {
             let low = if y1 < y2 { y1 } else { y2 };
             let high = if y1 > y2 { y1 } else { y2 };
 
-            for y in low..=high {
+            (low..=high).for_each(|y| {
                 map_one[y][x1] += 1;
-            }
+            });
         }
     }
 
-    let res_one = map_one.iter().fold(0, |sum, x| {
-        sum + x.iter().filter(|p| **p > 1).collect::<Vec<_>>().len()
-    });
+    let res_one = map_one
+        .iter()
+        .fold(0, |sum, x| sum + x.iter().filter(|p| **p > 1).count());
 
     let lines_two = include_str!("input.txt")
         .lines()
@@ -48,7 +48,7 @@ pub fn main() {
             line.split(" -> ")
                 .map(|point| {
                     point
-                        .split(",")
+                        .split(',')
                         .map(|value| value.parse::<usize>().expect("Could not parse value."))
                         .collect::<Vec<_>>()
                 })
@@ -74,37 +74,33 @@ pub fn main() {
             let low = if y1 < y2 { y1 } else { y2 };
             let high = if y1 > y2 { y1 } else { y2 };
 
-            for y in low..=high {
+            (low..=high).for_each(|y| {
                 map_two[y][x1] += 1;
-            }
-        } else {
-            if x1 < x2 {
-                if y1 < y2 {
-                    for x in x1..=x2 {
-                        map_two[y1 + (x - x1)][x] += 1;
-                    }
-                } else {
-                    for x in x1..=x2 {
-                        map_two[y1 - (x - x1)][x] += 1;
-                    }
+            });
+        } else if x1 < x2 {
+            if y1 < y2 {
+                for x in x1..=x2 {
+                    map_two[y1 + (x - x1)][x] += 1;
                 }
             } else {
-                if y1 < y2 {
-                    for x in x2..=x1 {
-                        map_two[y1 + (x1 - x)][x] += 1;
-                    }
-                } else {
-                    for x in x2..=x1 {
-                        map_two[y1 - (x1 - x)][x] += 1;
-                    }
+                for x in x1..=x2 {
+                    map_two[y1 - (x - x1)][x] += 1;
                 }
+            }
+        } else if y1 < y2 {
+            for x in x2..=x1 {
+                map_two[y1 + (x1 - x)][x] += 1;
+            }
+        } else {
+            for x in x2..=x1 {
+                map_two[y1 - (x1 - x)][x] += 1;
             }
         }
     }
 
-    let res_two = map_two.iter().fold(0, |sum, x| {
-        sum + x.iter().filter(|p| **p > 1).collect::<Vec<_>>().len()
-    });
+    let res_two = map_two
+        .iter()
+        .fold(0, |sum, x| sum + x.iter().filter(|p| **p > 1).count());
 
     println!("Result one: {}", res_one);
     println!("Result two: {}", res_two);

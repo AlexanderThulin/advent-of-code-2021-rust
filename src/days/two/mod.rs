@@ -2,7 +2,7 @@ pub fn main() {
     let directions: Vec<(&str, u32)> = include_str!("input.txt")
         .lines()
         .map(|line| {
-            let line_split: Vec<&str> = line.split(" ").collect();
+            let line_split: Vec<&str> = line.split(' ').collect();
             (
                 line_split[0],
                 line_split[1]

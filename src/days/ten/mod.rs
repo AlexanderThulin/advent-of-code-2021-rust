@@ -27,9 +27,9 @@ fn read_nav_line(line: Vec<char>, corrupted: bool) -> u64 {
             '{' => expected.push('}'),
             '<' => expected.push('>'),
             _ => {
-                if expected.len() > 0 && c == *expected.last().unwrap() {
+                if !expected.is_empty() && c == *expected.last().unwrap() {
                     expected.pop();
-                } else if expected.len() == 0 {
+                } else if expected.is_empty() {
                     continue;
                 } else {
                     return if corrupted {
